@@ -1,0 +1,23 @@
+{
+  "name": "hrp-monorepo",
+  "version": "1.0.0",
+  "description": "HRP React + Flask Monorepo",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run install:react",
+    "install:react": "npm --prefix hrp-react install",
+    "install:server": "cd hrp-server && python -m pip install --upgrade pip && pip install -r requirements.txt",
+    "install:all": "npm install && npm run install:react && npm run install:server",
+    "setup": "node setup.js",
+    "setup:windows": "install-all.bat",
+    "setup:unix": "bash install-all.sh",
+    "dev": "concurrently \"npm --prefix hrp-react run dev\" \"cd hrp-server && python wsgi.py\"",
+    "dev:react": "npm --prefix hrp-react run dev",
+    "dev:server": "cd hrp-server && python wsgi.py",
+    "build": "npm --prefix hrp-react run build",
+    "lint": "npm --prefix hrp-react run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
