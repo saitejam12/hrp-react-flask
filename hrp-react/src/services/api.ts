@@ -22,23 +22,31 @@ async function makeRequest<T>(
       ...options,
     });
 
-    const data = await response.json();
+    let data: unknown;
+    try {
+      data = await response.json();
+    } catch {
+      return {
+        status: response.status,
+        error: response.ok ? 'Invalid response from server' : `Server error (${response.status})`,
+      };
+    }
 
     if (!response.ok) {
       return {
         status: response.status,
-        error: data.error || 'An error occurred',
+        error: (data as Record<string, string>)?.error || 'An error occurred',
       };
     }
 
     return {
-      data,
+      data: data as T,
       status: response.status,
     };
-  } catch (error) {
+  } catch {
     return {
       status: 500,
-      error: error instanceof Error ? error.message : 'Network error',
+      error: 'Cannot connect to server. Make sure the backend is running.',
     };
   }
 }

@@ -9,10 +9,10 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   return (
     <div className="app-layout">
-      <Navbar />
-      <div className="layout-body">
-        <Sidebar />
-        {children}
+      <Sidebar />
+      <div className="layout-right">
+        <Navbar />
+        <main>{children}</main>
       </div>
     </div>
   );

@@ -1,8 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Layout } from "./components/Layout";
 import { LoginPage } from "./pages/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -10,39 +9,79 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { UnauthorizedPage } from "./pages/UnauthorizedPage";
 import { EmployeesPage } from "./pages/EmployeesPage";
 import { TasksPage } from "./pages/TasksPage";
+import { JobPostingsPage } from "./pages/recruitment/JobPostingsPage";
+import { ApplicantsPage } from "./pages/recruitment/ApplicantsPage";
+import { InterviewsPage } from "./pages/recruitment/InterviewsPage";
+import { OffersPage } from "./pages/recruitment/OffersPage";
 import "./App.css";
 
+function ProtectedLayout() {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#111827", fontSize: "1rem" }}>
+        Loading...
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return (
+    <Layout>
+      <Outlet />
+    </Layout>
+  );
+}
+
+function RecruitmentGuard() {
+  const { user } = useAuth();
+  if (!user || !["hr", "admin", "owner"].includes(user.role)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+  return <Outlet />;
+}
+
 function AppRoutes() {
-  // const { isAuthenticated } = useAuth();
-  const isAuthenticated = true;
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#111827" }}>
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-      {isAuthenticated && (
-        <Route
-          element={
-            <Layout>
-              <div />
-            </Layout>
-          }
-        >
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/employees" element={<EmployeesPage />} />
-          <Route path="/tasks" element={<TasksPage />} />
+      <Route element={<ProtectedLayout />}>
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/employees" element={<EmployeesPage />} />
+        <Route path="/tasks" element={<TasksPage />} />
+
+        <Route element={<RecruitmentGuard />}>
+          <Route path="/recruitment/jobs" element={<JobPostingsPage />} />
+          <Route path="/recruitment/applicants" element={<ApplicantsPage />} />
+          <Route path="/recruitment/interviews" element={<InterviewsPage />} />
+          <Route path="/recruitment/offers" element={<OffersPage />} />
         </Route>
-      )}
+      </Route>
 
       <Route
         path="/"
-        element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />}
+        element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />}
       />
       <Route
         path="*"
-        element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />}
+        element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />}
       />
     </Routes>
   );

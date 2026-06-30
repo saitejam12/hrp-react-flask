@@ -21,7 +21,7 @@ export function LoginPage() {
       await login(email, password);
       window.location.href = '/dashboard';
     } catch (err) {
-      setFormError(error || 'Login failed');
+      setFormError(err instanceof Error ? err.message : 'Login failed');
     }
   };
 
@@ -29,11 +29,15 @@ export function LoginPage() {
     <div className="login-container">
       <div className="login-box">
         <div className="login-header">
-          <h1>HRP</h1>
-          <p>Human Resource Portal</p>
+          <div className="login-brand">
+            <h1>HRP</h1>
+            <span className="login-brand-sub">ENTERPRISE SUITE</span>
+          </div>
+          <p className="login-welcome">Welcome back</p>
+          <p className="login-subtitle">Sign in to your account to continue</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="login-form">
+        <form onSubmit={handleSubmit} className="login-form" noValidate>
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -59,33 +63,13 @@ export function LoginPage() {
           </div>
 
           {(formError || error) && (
-            <div className="error-message">
-              {formError || error}
-            </div>
+            <div className="error-message">{formError || error}</div>
           )}
 
           <button type="submit" disabled={isLoading} className="login-btn">
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-
-        <div className="login-footer">
-          <p className="demo-info">
-            <strong>Demo Accounts:</strong>
-          </p>
-          <div className="demo-accounts">
-            <div className="account">
-              <strong>Admin:</strong> admin@example.com
-            </div>
-            <div className="account">
-              <strong>Manager:</strong> manager@example.com
-            </div>
-            <div className="account">
-              <strong>Employee:</strong> employee@example.com
-            </div>
-          </div>
-          <p className="password-note">Password: password123</p>
-        </div>
       </div>
     </div>
   );

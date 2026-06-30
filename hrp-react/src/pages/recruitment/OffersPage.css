@@ -1,0 +1,136 @@
+.offers-page {
+  padding: 2rem;
+  min-height: 100%;
+  background: #f9fafb;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+.page-header h1 { margin: 0 0 0.4rem; font-size: 2rem; color: #333; }
+.page-header p  { margin: 0; color: #999; font-size: 0.95rem; }
+
+.btn-create {
+  padding: 0.7rem 1.4rem;
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+.btn-create:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(102, 126, 234, 0.45);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.11);
+  transform: translateY(-2px);
+}
+.stat-card.stat-pending  { border-left: 4px solid #f59e0b; }
+.stat-card.stat-accepted { border-left: 4px solid #10b981; }
+.stat-card.stat-declined { border-left: 4px solid #ef4444; }
+.stat-card.stat-rate     { border-left: 4px solid #111827; }
+
+.stat-icon { font-size: 1.8rem; flex-shrink: 0; }
+.stat-content h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+.stat-value { margin: 0.35rem 0 0; font-size: 1.8rem; font-weight: 700; color: #333; }
+
+.filters-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.filter-tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.filter-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  background: white;
+  border: 1.5px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-tab:hover { border-color: #111827; color: #111827; }
+.filter-tab.active {
+  background: #111827;
+  border-color: transparent;
+  color: white;
+}
+.filter-tab.active .filter-count { background: rgba(255,255,255,0.25); color: white; }
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: #eee;
+  color: #555;
+  border-radius: 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.results-summary { font-size: 0.85rem; color: #888; margin-bottom: 1rem; }
+
+:global(.ostatus-pending)  { background-color: #fef3c7; color: #b45309; }
+:global(.ostatus-accepted) { background-color: #dcfce7; color: #15803d; }
+:global(.ostatus-declined) { background-color: #fee2e2; color: #b91c1c; }
+:global(.ostatus-expired)  { background-color: #f1f5f9; color: #64748b; }
+
+@media (max-width: 768px) {
+  .offers-page { padding: 1rem; }
+  .page-header { flex-direction: column; align-items: flex-start; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}

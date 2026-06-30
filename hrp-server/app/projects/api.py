@@ -23,13 +23,22 @@ MOCK_USERS = {
         'department': 'Management',
         'createdAt': datetime.now().isoformat(),
     },
-    'manager@example.com': {
+    'hr@example.com': {
         'id': str(uuid.uuid4()),
-        'email': 'manager@example.com',
+        'email': 'hr@example.com',
         'password': 'password123',
-        'name': 'Manager User',
-        'role': 'manager',
-        'department': 'Operations',
+        'name': 'HR Manager',
+        'role': 'hr',
+        'department': 'Human Resources',
+        'createdAt': datetime.now().isoformat(),
+    },
+    'owner@example.com': {
+        'id': str(uuid.uuid4()),
+        'email': 'owner@example.com',
+        'password': 'password123',
+        'name': 'Company Owner',
+        'role': 'owner',
+        'department': 'Executive',
         'createdAt': datetime.now().isoformat(),
     },
     'employee@example.com': {

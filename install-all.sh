@@ -34,7 +34,11 @@ python3 -m venv venv
 echo ""
 
 echo "[4/5] Installing Python dependencies..."
-source venv/bin/activate
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    source venv/Scripts/activate
+else
+    source venv/bin/activate
+fi
 pip install --upgrade pip
 pip install -r requirements.txt
 deactivate

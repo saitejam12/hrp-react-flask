@@ -1,63 +1,69 @@
 .dashboard {
   padding: 2rem;
-  min-height: calc(100vh - 70px);
-  background: #f5f7fa;
+  min-height: 100%;
+  background: #f9fafb;
 }
 
-.dashboard-title {
-  margin-bottom: 2rem;
-}
-
-.dashboard-title h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #8b8b8b;
-  font-weight: 600;
-}
 
 .dashboard-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .dashboard-header h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2rem;
-  color: #cabfbf;
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
 }
 
 .dashboard-date {
   margin: 0;
-  color: #999;
-  font-size: 0.9rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.dashboard-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
 }
 
 .dashboard-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .card {
   background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-top: 3px solid transparent;
   display: flex;
+  align-items: center;
   gap: 1rem;
-  transition: all 0.3s;
+  transition: box-shadow 0.15s, transform 0.15s;
 }
 
 .card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
 }
 
-.card-icon {
-  font-size: 2.5rem;
+.card-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .card-content {
@@ -65,19 +71,20 @@
 }
 
 .card-title {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #999;
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.06em;
   font-weight: 600;
 }
 
 .card-value {
-  margin: 0.5rem 0 0 0;
-  font-size: 2rem;
+  margin: 0;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #333;
+  color: #111827;
+  line-height: 1;
 }
 
 .card-change {
@@ -124,7 +131,7 @@
 }
 
 .view-all {
-  color: #667eea;
+  color: #111827;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -132,7 +139,7 @@
 }
 
 .view-all:hover {
-  color: #764ba2;
+  color: #374151;
 }
 
 .tasks-list {
@@ -322,7 +329,7 @@
     rgba(118, 75, 162, 0.1)
   );
   border-radius: 8px;
-  border-left: 3px solid #667eea;
+  border-left: 3px solid #111827;
 }
 
 .role-info p {
@@ -332,7 +339,7 @@
 }
 
 .role-info strong {
-  color: #667eea;
+  color: #111827;
   font-weight: 700;
 }
 
@@ -496,13 +503,13 @@
 }
 
 .tag.admin {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #111827 0%, #374151 100%);
   color: white;
 }
 
 .tag.manager {
   background: #e8eaf6;
-  color: #667eea;
+  color: #111827;
 }
 
 .tag.employee {
@@ -510,23 +517,17 @@
   color: #27ae60;
 }
 
-@media (max-width: 768px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 1024px) {
+  .dashboard-cards { grid-template-columns: repeat(2, 1fr); }
+}
 
-  .dashboard-cards {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
+@media (max-width: 768px) {
+  .dashboard { padding: 1rem; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .dashboard-cards { grid-template-columns: repeat(2, 1fr); }
 
   .task-item {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .task-right {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 1rem;
   }
 }
