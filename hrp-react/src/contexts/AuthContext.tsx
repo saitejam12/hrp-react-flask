@@ -12,19 +12,19 @@ import { api } from "../services/api";
 const DEMO_USERS: Record<string, { user: User; password: string }> = {
   "admin@example.com": {
     password: "password123",
-    user: { id: "demo-1", email: "admin@example.com", name: "Admin User", role: "admin", department: "Management", createdAt: new Date().toISOString() },
+    user: { id: "demo-1", email: "admin@example.com", name: "Rajesh Mehta", role: "admin", department: "Management", createdAt: new Date().toISOString() },
   },
   "hr@example.com": {
     password: "password123",
-    user: { id: "demo-2", email: "hr@example.com", name: "HR Manager", role: "hr", department: "Human Resources", createdAt: new Date().toISOString() },
+    user: { id: "demo-2", email: "hr@example.com", name: "Sunita Rao", role: "hr", department: "Human Resources", createdAt: new Date().toISOString() },
   },
   "owner@example.com": {
     password: "password123",
-    user: { id: "demo-3", email: "owner@example.com", name: "Company Owner", role: "owner", department: "Executive", createdAt: new Date().toISOString() },
+    user: { id: "demo-3", email: "owner@example.com", name: "Vikram Kapoor", role: "owner", department: "Executive", createdAt: new Date().toISOString() },
   },
   "employee@example.com": {
     password: "password123",
-    user: { id: "demo-4", email: "employee@example.com", name: "Employee User", role: "employee", department: "Engineering", createdAt: new Date().toISOString() },
+    user: { id: "demo-4", email: "employee@example.com", name: "Priya Sharma", role: "employee", department: "Engineering", createdAt: new Date().toISOString() },
   },
 };
 

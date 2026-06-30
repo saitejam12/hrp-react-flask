@@ -136,19 +136,29 @@ export function InterviewModal({
           <div className="form-grid">
 
             <div className="form-group full-width">
-              <label htmlFor="applicantId">Candidate *</label>
-              <select
-                id="applicantId" name="applicantId"
-                value={form.applicantId} onChange={handleApplicantChange}
-                className={errors.applicantId ? 'error' : ''}
-              >
-                <option value="">— Select a candidate —</option>
-                {applicants.map((a) => (
-                  <option key={a.id} value={a.id}>
-                    {a.firstName} {a.lastName} — {a.jobTitle}
-                  </option>
-                ))}
-              </select>
+              <label htmlFor="applicantId">Candidate {!interview && '*'}</label>
+              {interview ? (
+                <input
+                  id="applicantId"
+                  type="text"
+                  value={form.applicantName}
+                  readOnly
+                  className="readonly-field"
+                />
+              ) : (
+                <select
+                  id="applicantId" name="applicantId"
+                  value={form.applicantId} onChange={handleApplicantChange}
+                  className={errors.applicantId ? 'error' : ''}
+                >
+                  <option value="">— Select a candidate —</option>
+                  {applicants.map((a) => (
+                    <option key={a.id} value={a.id}>
+                      {a.firstName} {a.lastName} — {a.jobTitle}
+                    </option>
+                  ))}
+                </select>
+              )}
               {errors.applicantId && <span className="field-error">{errors.applicantId}</span>}
             </div>
 
@@ -219,7 +229,7 @@ export function InterviewModal({
               <input
                 id="interviewersText" name="interviewersText" type="text"
                 value={form.interviewersText} onChange={handleChange}
-                placeholder="Names separated by commas, e.g. Sarah Lee, James Wu"
+                placeholder="Names separated by commas, e.g. Sunita Rao, Jayesh Kumar"
               />
             </div>
 

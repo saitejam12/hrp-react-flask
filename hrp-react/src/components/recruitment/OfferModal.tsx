@@ -17,7 +17,7 @@ const EMPTY_FORM = {
   applicantName: '',
   jobTitle: '',
   salary: '',
-  currency: 'USD',
+  currency: 'INR',
   startDate: '',
   expiryDate: '',
   status: 'pending' as Offer['status'],
@@ -114,47 +114,60 @@ export function OfferModal({
         <form onSubmit={handleSubmit} className="modal-form" noValidate>
           <div className="form-grid">
             <div className="form-group full-width">
-              <label htmlFor="applicantId">Candidate *</label>
-              <select
-                id="applicantId"
-                name="applicantId"
-                value={form.applicantId}
-                onChange={handleApplicantChange}
-                className={errors.applicantId ? 'error' : ''}
-              >
-                <option value="">— Select a candidate —</option>
-                {applicants.map((a) => (
-                  <option key={a.id} value={a.id}>
-                    {a.firstName} {a.lastName} — {a.jobTitle}
-                  </option>
-                ))}
-              </select>
+              <label htmlFor="applicantId">Candidate {!offer && '*'}</label>
+              {offer ? (
+                <input
+                  id="applicantId"
+                  type="text"
+                  value={form.applicantName}
+                  readOnly
+                  className="readonly-field"
+                />
+              ) : (
+                <select
+                  id="applicantId"
+                  name="applicantId"
+                  value={form.applicantId}
+                  onChange={handleApplicantChange}
+                  className={errors.applicantId ? 'error' : ''}
+                >
+                  <option value="">— Select a candidate —</option>
+                  {applicants.map((a) => (
+                    <option key={a.id} value={a.id}>
+                      {a.firstName} {a.lastName} — {a.jobTitle}
+                    </option>
+                  ))}
+                </select>
+              )}
               {errors.applicantId && <span className="field-error">{errors.applicantId}</span>}
             </div>
 
             <div className="form-group">
-              <label htmlFor="salary">Annual Salary *</label>
+              <label htmlFor="salary">Annual CTC (₹) *</label>
               <input
                 id="salary"
                 name="salary"
                 type="number"
                 min="0"
-                step="1000"
+                step="100000"
                 value={form.salary}
                 onChange={handleChange}
-                placeholder="e.g. 95000"
+                placeholder="e.g. 1500000 (₹15 LPA)"
                 className={errors.salary ? 'error' : ''}
               />
+              {form.salary && !isNaN(Number(form.salary)) && Number(form.salary) > 0 && (
+                <span className="field-hint">= ₹{(Number(form.salary) / 100000).toFixed(1)} LPA</span>
+              )}
               {errors.salary && <span className="field-error">{errors.salary}</span>}
             </div>
 
             <div className="form-group">
               <label htmlFor="currency">Currency</label>
               <select id="currency" name="currency" value={form.currency} onChange={handleChange}>
+                <option value="INR">INR — Indian Rupee</option>
                 <option value="USD">USD — US Dollar</option>
                 <option value="EUR">EUR — Euro</option>
                 <option value="GBP">GBP — British Pound</option>
-                <option value="CAD">CAD — Canadian Dollar</option>
               </select>
             </div>
 

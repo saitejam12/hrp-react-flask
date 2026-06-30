@@ -21,7 +21,11 @@ export const OFFER_STATUS_META: Record<OfferStatus, { label: string; className: 
 const OFFER_STATUS_ORDER: OfferStatus[] = ['pending', 'accepted', 'declined', 'expired'];
 
 function formatSalary(salary: number, currency: string) {
-  return new Intl.NumberFormat('en-US', {
+  if (currency === 'INR') {
+    const lpa = salary / 100000;
+    return `₹${lpa % 1 === 0 ? lpa.toFixed(0) : lpa.toFixed(1)} LPA`;
+  }
+  return new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency,
     maximumFractionDigits: 0,

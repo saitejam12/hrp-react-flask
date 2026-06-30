@@ -91,34 +91,37 @@ export function ApplicantModal({
         <form onSubmit={handleSubmit} className="modal-form" noValidate>
           <div className="form-grid">
             <div className="form-group">
-              <label htmlFor="firstName">First Name *</label>
+              <label htmlFor="firstName">First Name {!applicant && '*'}</label>
               <input
                 id="firstName" name="firstName" type="text"
                 value={form.firstName} onChange={handleChange}
-                placeholder="Jane"
-                className={errors.firstName ? 'error' : ''}
+                placeholder="e.g. Priya"
+                readOnly={!!applicant}
+                className={[errors.firstName ? 'error' : '', applicant ? 'readonly-field' : ''].join(' ').trim()}
               />
               {errors.firstName && <span className="field-error">{errors.firstName}</span>}
             </div>
 
             <div className="form-group">
-              <label htmlFor="lastName">Last Name *</label>
+              <label htmlFor="lastName">Last Name {!applicant && '*'}</label>
               <input
                 id="lastName" name="lastName" type="text"
                 value={form.lastName} onChange={handleChange}
-                placeholder="Smith"
-                className={errors.lastName ? 'error' : ''}
+                placeholder="e.g. Sharma"
+                readOnly={!!applicant}
+                className={[errors.lastName ? 'error' : '', applicant ? 'readonly-field' : ''].join(' ').trim()}
               />
               {errors.lastName && <span className="field-error">{errors.lastName}</span>}
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email *</label>
+              <label htmlFor="email">Email {!applicant && '*'}</label>
               <input
                 id="email" name="email" type="text"
                 value={form.email} onChange={handleChange}
-                placeholder="jane@example.com"
-                className={errors.email ? 'error' : ''}
+                placeholder="e.g. priya.sharma@gmail.com"
+                readOnly={!!applicant}
+                className={[errors.email ? 'error' : '', applicant ? 'readonly-field' : ''].join(' ').trim()}
               />
               {errors.email && <span className="field-error">{errors.email}</span>}
             </div>
@@ -128,7 +131,9 @@ export function ApplicantModal({
               <input
                 id="phone" name="phone" type="text"
                 value={form.phone} onChange={handleChange}
-                placeholder="+1 (555) 000-0000"
+                placeholder="e.g. +91 98765 43210"
+                readOnly={!!applicant}
+                className={applicant ? 'readonly-field' : ''}
               />
             </div>
 

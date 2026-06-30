@@ -13,6 +13,12 @@ import { JobPostingsPage } from "./pages/recruitment/JobPostingsPage";
 import { ApplicantsPage } from "./pages/recruitment/ApplicantsPage";
 import { InterviewsPage } from "./pages/recruitment/InterviewsPage";
 import { OffersPage } from "./pages/recruitment/OffersPage";
+import { ApplyLeavePage } from "./pages/leave/ApplyLeavePage";
+import { LeaveBalancePage } from "./pages/leave/LeaveBalancePage";
+import { LeaveApprovalsPage } from "./pages/leave/LeaveApprovalsPage";
+import { LeaveCalendarPage } from "./pages/leave/LeaveCalendarPage";
+import { LeaveEncashmentPage } from "./pages/leave/LeaveEncashmentPage";
+
 import "./App.css";
 
 function ProtectedLayout() {
@@ -73,6 +79,12 @@ function AppRoutes() {
           <Route path="/recruitment/interviews" element={<InterviewsPage />} />
           <Route path="/recruitment/offers" element={<OffersPage />} />
         </Route>
+
+        <Route path="/leave/apply"      element={<ApplyLeavePage />} />
+        <Route path="/leave/balance"    element={<LeaveBalancePage />} />
+        <Route path="/leave/calendar"   element={<LeaveCalendarPage />} />
+        <Route path="/leave/encashment" element={<LeaveEncashmentPage />} />
+        <Route path="/leave/approvals"  element={<LeaveApprovalsPage />} />
       </Route>
 
       <Route

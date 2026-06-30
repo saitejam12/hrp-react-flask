@@ -21,6 +21,8 @@ def register_projects(app):
     """Register all project modules."""
     from app.projects import api
     from app.recruitment import api as recruitment_api
+    from app.leave import api as leave_api
 
     app.register_blueprint(api.bp)
     app.register_blueprint(recruitment_api.bp)
+    app.register_blueprint(leave_api.bp)

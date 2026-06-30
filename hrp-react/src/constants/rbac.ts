@@ -60,4 +60,9 @@ export const ROUTE_PERMISSIONS: Record<string, string[]> = {
   '/recruitment/applicants': ['hr', 'owner', 'admin'],
   '/recruitment/interviews': ['hr', 'owner', 'admin'],
   '/recruitment/offers': ['hr', 'owner', 'admin'],
+  '/leave/apply':        ['admin', 'hr', 'owner', 'employee'],
+  '/leave/balance':      ['admin', 'hr', 'owner', 'employee'],
+  '/leave/approvals':    ['admin', 'hr', 'owner'],
+  '/leave/calendar':     ['admin', 'hr', 'owner', 'employee'],
+  '/leave/encashment':   ['admin', 'hr', 'owner', 'employee'],
 };
